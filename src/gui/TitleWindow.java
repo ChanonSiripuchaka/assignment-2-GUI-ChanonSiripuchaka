@@ -25,13 +25,16 @@ public class TitleWindow {
 	public TitleWindow(Stage stage) {
 	      TabPane tabPane = new TabPane();
 
-	      //Tab Buy Journey starts Here
+	      /*
+	       * 
+	       * Tab Buy Journey starts Here
+	       */
 	      
 	      Tab buyJourney = new Tab();
 	      buyJourney.setText("Buy Journey");
 	      
 	      VBox tabOneVBox = new VBox(5);
-	      tabOneVBox.setPadding(new Insets(10,0,0,0));
+	     // tabOneVBox.setPadding(new Insets(10,0,0,0));
 	      
 	      HBox userHbox = new HBox(10);
 	      Label userListLabel = new Label("Select User");
@@ -75,12 +78,28 @@ public class TitleWindow {
  
 	      
 	      tabOneVBox.getChildren().addAll(userHbox, startStationHbox, endStationHbox ,daysHbox ,startTimeHbox , endTimeHbox ,messageBoxLabel , messageBoxTextArea , buttonsHbox);
-	          
+	      tabOneVBox.setStyle("-fx-padding: 10;" + "-fx-border-style: solid inside;"
+	    	        + "-fx-border-width: 1;" + "-fx-border-insets: 5;"
+	    	        + "-fx-border-radius: 5;" + "-fx-border-color: black;");   
 	      
 	      buyJourney.setContent(tabOneVBox);
-	      //Tab Buy Journey Finish Here
+	      /*
+	       * 
+	       * 
+	       * Tab Buy Journey Finish Here
+	       * 
+	       */
 	      
 	      
+	      
+	      
+	      
+	      /*
+	       * 
+	       * 
+	       * Tab Manage users Starts Here
+	       * 
+	       */
 	      
 	      Tab manageUsers = new Tab();
 	      manageUsers.setText("Manage Users");
@@ -169,13 +188,42 @@ public class TitleWindow {
 	      tabTwoVBox.getChildren().addAll(userDetailHbox, addUserVBox );
 	      
 	      manageUsers.setContent(tabTwoVBox);
+	      /*
+	       * 
+	       * 
+	       * Tab manage users Finish Here
+	       * 
+	       */
 	      
+	      
+	      /*
+	       * 
+	       * Tab display reports starts here 
+	       * 
+	       */
 	      Tab displayReports = new Tab();
 	      displayReports.setText("Display Reports");
+	      VBox tabThreeVBox = new VBox(5);
+	      tabThreeVBox.setPadding(new Insets(10,0,0,0));
+	      
+	      HBox userHboxTabThree = new HBox(10);
+	      Label userListLabelTabThree = new Label("Select User");
+	      ComboBox<String> usersListTabThree = new ComboBox<String>();
+	      userHboxTabThree.getChildren().addAll(userListLabelTabThree , usersListTabThree);
+	     
+	     
+	      Button btnDisplayJourney = new Button("Display User Journeys");
+	      
+	      TextArea reportsArea = new TextArea();
+	      reportsArea.setEditable(false);
+	      
+	      tabThreeVBox.getChildren().addAll(userHboxTabThree , btnDisplayJourney , reportsArea);
+	      tabThreeVBox.setStyle("-fx-padding: 10;" + "-fx-border-style: solid inside;"
+	    	        + "-fx-border-width: 1;" + "-fx-border-insets: 5;"
+	    	        + "-fx-border-radius: 5;" + "-fx-border-color: black;");
 	      
 	      
-	      
-	      
+	      displayReports.setContent(tabThreeVBox);
 	      
 	      //Adding tabs to the tab pane
 	      tabPane.getTabs().addAll(buyJourney, manageUsers, displayReports);
