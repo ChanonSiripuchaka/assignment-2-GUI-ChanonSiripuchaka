@@ -23,6 +23,8 @@ public class TitleWindow {
 	private AnchorPane pane;
 
 	public TitleWindow(Stage stage) {
+		
+			
 	      TabPane tabPane = new TabPane();
 
 	      /*

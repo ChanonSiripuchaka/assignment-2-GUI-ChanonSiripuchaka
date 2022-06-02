@@ -8,6 +8,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
+import fileio.Utils;
+
 public class MyTiSystem {
 
 	public static Scanner input = new Scanner(System.in);
@@ -15,11 +17,8 @@ public class MyTiSystem {
 	public static void main(String[] args) {
 
 		ArrayList<Journey> journeys = new ArrayList<>();
-		Map<String, User> usersList = new HashMap<String, User>();
-		ArrayList<MyTi> myTis = new ArrayList<MyTi>();
 		ArrayList<Station> stations = new ArrayList<Station>();
 		createTestStations(stations);
-		createTestUsers(usersList, myTis);
 		NumberFormat df = new DecimalFormat("#0.00");
 
 		while (true) {
@@ -40,17 +39,17 @@ public class MyTiSystem {
 
 				switch (userSelection) {
 				case 1: // Journey Create
-					if (usersList.size() > 0) {
+					if (Utils.usersList.size() > 0) {
 							int myTiIndex = 0;
 							int day = 0;
 							int startTime = 0;
 							int endTime = 0;
 							int startStationIndex = 0;
 							int endStationIndex = 0;
-							printUsersIds(usersList);
+							printUsersIds(Utils.usersList);
 							if (input.hasNext()) {
 								String userId = input.next();
-								myTiIndex = getMyTiIndex(userId, myTis);
+								myTiIndex = getMyTiIndex(userId, Utils.myTis);
 								printDays();
 								if (input.hasNextInt()) {
 									day = input.nextInt();
@@ -147,12 +146,12 @@ public class MyTiSystem {
 															} else {
 																if ((pass.getPrice() + journeys.get(check).getPass()
 																		.getPrice() < ifAllDayPass.getPrice())) {
-																	journeys.add(new Journey(pass, myTis.get(myTiIndex),
+																	journeys.add(new Journey(pass, Utils.myTis.get(myTiIndex),
 																			startTime, endTime, Days.values()[day],
 																			stations.get(endStationIndex),
 																			stations.get(startStationIndex), isSameZone,
 																			isAllDay));
-																	myTis.get(myTiIndex).setMyTi(myTis.get(myTiIndex).getMyTi()-pass.getPrice());
+																	Utils.myTis.get(myTiIndex).setMyTi(Utils.myTis.get(myTiIndex).getMyTi()-pass.getPrice());
 
 																	System.out.println("Journey created");
 																} else {
@@ -176,11 +175,11 @@ public class MyTiSystem {
 															}
 														}
 													} else {
-														journeys.add(new Journey(pass, myTis.get(myTiIndex), startTime,
+														journeys.add(new Journey(pass, Utils.myTis.get(myTiIndex), startTime,
 																endTime, Days.values()[day],
 																stations.get(endStationIndex),
 																stations.get(startStationIndex), true, isAllDay));
-														myTis.get(myTiIndex).setMyTi(myTis.get(myTiIndex).getMyTi()-pass.getPrice());
+														Utils.myTis.get(myTiIndex).setMyTi(Utils.myTis.get(myTiIndex).getMyTi()-pass.getPrice());
 														stations.get(endStationIndex).setVisitsEnd(
 																stations.get(endStationIndex).getVisitsEnd() + 1);
 														stations.get(startStationIndex).setVisitsStart(
@@ -216,12 +215,12 @@ public class MyTiSystem {
 															} else {
 																if ((pass.getPrice() + journeys.get(check).getPass()
 																		.getPrice() < ifAllDayPass.getPrice())) {
-																	journeys.add(new Journey(pass, myTis.get(myTiIndex),
+																	journeys.add(new Journey(pass, Utils.myTis.get(myTiIndex),
 																			startTime, endTime, Days.values()[day],
 																			stations.get(endStationIndex),
 																			stations.get(startStationIndex), isSameZone,
 																			isAllDay));
-																	myTis.get(myTiIndex).setMyTi(myTis.get(myTiIndex).getMyTi()-pass.getPrice());
+																	Utils.myTis.get(myTiIndex).setMyTi(Utils.myTis.get(myTiIndex).getMyTi()-pass.getPrice());
 
 																	stations.get(endStationIndex).setVisitsEnd(
 																			stations.get(endStationIndex).getVisitsEnd()
@@ -252,11 +251,11 @@ public class MyTiSystem {
 															}
 														}
 													} else {
-														journeys.add(new Journey(pass, myTis.get(myTiIndex), startTime,
+														journeys.add(new Journey(pass, Utils.myTis.get(myTiIndex), startTime,
 																endTime, Days.values()[day],
 																stations.get(endStationIndex),
 																stations.get(startStationIndex), isSameZone, isAllDay));
-														myTis.get(myTiIndex).setMyTi(myTis.get(myTiIndex).getMyTi()-pass.getPrice());
+														Utils.myTis.get(myTiIndex).setMyTi(Utils.myTis.get(myTiIndex).getMyTi()-pass.getPrice());
 
 														stations.get(endStationIndex).setVisitsEnd(
 																stations.get(endStationIndex).getVisitsEnd() + 1);
@@ -268,10 +267,10 @@ public class MyTiSystem {
 												}
 
 											} else {
-												journeys.add(new Journey(pass, myTis.get(myTiIndex), startTime, endTime,
+												journeys.add(new Journey(pass, Utils.myTis.get(myTiIndex), startTime, endTime,
 														Days.values()[day], stations.get(endStationIndex),
 														stations.get(startStationIndex), isSameZone, isAllDay));
-												myTis.get(myTiIndex).setMyTi(myTis.get(myTiIndex).getMyTi()-pass.getPrice());
+												Utils.myTis.get(myTiIndex).setMyTi(Utils.myTis.get(myTiIndex).getMyTi()-pass.getPrice());
 
 												stations.get(endStationIndex)
 														.setVisitsEnd(stations.get(endStationIndex).getVisitsEnd() + 1);
@@ -302,20 +301,20 @@ public class MyTiSystem {
 
 					break;
 				case 2: // Recharge MyTi
-					if (usersList.size() > 0) {
+					if (Utils.usersList.size() > 0) {
 						System.out.println("Recharge");
-						printUsersIds(usersList);
+						printUsersIds(Utils.usersList);
 						if (input.hasNext()) {
 							String id = input.next();
-							int myTiIndex = getMyTiIndex(id, myTis);
+							int myTiIndex = getMyTiIndex(id, Utils.myTis);
 							System.out.print("How much do you want to add : ");
 
 							String crdt = input.next();
 							System.out.println();
 							double crd = Double.parseDouble(crdt);
 
-							while (!(((crd + myTis.get(myTiIndex).getMyTi()) <= 100) && (crd % 5 == 0))) {
-								System.out.println(checkCreditConstraints(myTis.get(myTiIndex), crd));
+							while (!(((crd + Utils.myTis.get(myTiIndex).getMyTi()) <= 100) && (crd % 5 == 0))) {
+								System.out.println(checkCreditConstraints(Utils.myTis.get(myTiIndex), crd));
 								System.out.print("How much do you want to add : ");
 
 								crdt = input.nextLine();
@@ -323,8 +322,8 @@ public class MyTiSystem {
 								crd = Double.parseDouble(crdt);
 							}
 
-							myTis.get(myTiIndex).setMyTi(myTis.get(myTiIndex).getMyTi() + crd);
-							System.out.println(myTis.get(myTiIndex).currentCredit());
+							Utils.myTis.get(myTiIndex).setMyTi(Utils.myTis.get(myTiIndex).getMyTi() + crd);
+							System.out.println(Utils.myTis.get(myTiIndex).currentCredit());
 							System.out.println();
 							break;
 
@@ -336,13 +335,13 @@ public class MyTiSystem {
 
 					break;
 				case 3: // Show remaining Credit
-					if (usersList.size() > 0) {
-						printUsersIds(usersList);
+					if (Utils.usersList.size() > 0) {
+						printUsersIds(Utils.usersList);
 						if (input.hasNext()) {
 							String id = input.next();
-							int myTiIndex = getMyTiIndex(id, myTis);
+							int myTiIndex = getMyTiIndex(id, Utils.myTis);
 							if (myTiIndex != -1) {
-								System.out.println(myTis.get(myTiIndex).currentCredit());
+								System.out.println(Utils.myTis.get(myTiIndex).currentCredit());
 								System.out.println();
 							} else {
 								System.out.println("Wrong choice");
@@ -482,7 +481,7 @@ public class MyTiSystem {
 					while (true) {
 						System.out.println("Enter User Id: ");
 						id = input.next();
-						if (!searchId(id, usersList)) {
+						if (!searchId(id, Utils.usersList)) {
 							break;
 						} else {
 							System.out.println("Id Already in use, please enter a different id.");
@@ -494,9 +493,9 @@ public class MyTiSystem {
 					String email = input.next();
 					UserTypeEnum userType = getUserType();
 					User user = new User(id, email, name, userType);
-					usersList.put(id, user);
+					Utils.usersList.put(id, user);
 					MyTi myTi = new MyTi(user);
-					myTis.add(myTi);
+					Utils.myTis.add(myTi);
 
 					break;
 				case 8: // exit
@@ -550,15 +549,7 @@ public class MyTiSystem {
 		System.out.println("Choose day: ");
 	}
 
-	private static void createTestUsers(Map<String, User> usersList, ArrayList<MyTi> myTis) {
-		User userTestOne = new User("lc", "lawrence.cavedon@rmit.edu.au", "Lawrence Cavedon", UserTypeEnum.SENIOR);
-		User userTestTwo = new User("vm", "vuhuy.mai@rmit.edu.au", "Xiang Li", UserTypeEnum.ADULT);
-		usersList.put(userTestOne.getId(), userTestOne);
-		usersList.put(userTestTwo.getId(), userTestTwo);
-		myTis.add(new MyTi(userTestOne));
-		myTis.add(new MyTi(userTestTwo));
-
-	}
+	
 
 	public static boolean searchId(String id, Map<String, User> usersList) {
 		for (String key : usersList.keySet()) {
