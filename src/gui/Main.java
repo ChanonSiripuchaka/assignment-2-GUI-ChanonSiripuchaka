@@ -13,7 +13,7 @@ public class Main extends Application {
 	public void start(Stage primaryStage) {
 		try {
 			title = new TitleWindow(primaryStage);
-			Scene scene = new Scene(title.getRoot(),400,400);
+			Scene scene = new Scene(title.getRoot(),600,600);
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 			primaryStage.setScene(scene);
 			primaryStage.setTitle("MyTi Ticketing System");

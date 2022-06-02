@@ -6,13 +6,17 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import myti.User;
 
 public class TitleWindow {
 
@@ -21,6 +25,7 @@ public class TitleWindow {
 	public TitleWindow(Stage stage) {
 	      TabPane tabPane = new TabPane();
 
+	      //Tab Buy Journey starts Here
 	      
 	      Tab buyJourney = new Tab();
 	      buyJourney.setText("Buy Journey");
@@ -70,12 +75,100 @@ public class TitleWindow {
  
 	      
 	      tabOneVBox.getChildren().addAll(userHbox, startStationHbox, endStationHbox ,daysHbox ,startTimeHbox , endTimeHbox ,messageBoxLabel , messageBoxTextArea , buttonsHbox);
+	          
 	      
-	      	      
 	      buyJourney.setContent(tabOneVBox);
+	      //Tab Buy Journey Finish Here
+	      
+	      
 	      
 	      Tab manageUsers = new Tab();
 	      manageUsers.setText("Manage Users");
+	      
+	      VBox tabTwoVBox = new VBox(5);
+	      tabTwoVBox.setPadding(new Insets(10,0,0,0));
+	      
+	      HBox userDetailHbox = new HBox(10);
+	      
+	      TableView tableView = new TableView();
+	      tableView.setPrefWidth(150);
+	      tableView.setPrefHeight(200);
+	      
+	      TableColumn<User, String> column1 = 
+	      new TableColumn<>("Id");
+	      
+	      column1.setCellValueFactory(
+	          new PropertyValueFactory<>("id"));
+
+
+	      TableColumn<User, String> column2 = 
+	      new TableColumn<>("Name");
+	      
+	      column2.setCellValueFactory(
+	          new PropertyValueFactory<>("name"));
+
+
+	      tableView.getColumns().add(column1);
+	      tableView.getColumns().add(column2);
+	      //Still to do
+//	      tableView.getItems().add(
+//	        new Person("John", "Doe"));
+//	      tableView.getItems().add(
+//	        new Person("Jane", "Deer"));
+
+	      TextArea userDetailTextArea = new TextArea();
+	      userDetailTextArea.setPrefWidth(200);
+	      userDetailTextArea.setPrefHeight(250);
+	      
+	      VBox addCreditVBox  = new VBox(10);
+	      Label addCreditLabel = new Label("Enter Credit to enter");
+	      TextField txtAddCredit = new TextField();
+	      Button btnAddCredit = new Button("Add Credit");
+	      addCreditVBox.getChildren().addAll(addCreditLabel, txtAddCredit , btnAddCredit);
+	      
+	      userDetailHbox.getChildren().addAll(tableView , userDetailTextArea, addCreditVBox);
+	      userDetailHbox.setStyle("-fx-padding: 10;" + "-fx-border-style: solid inside;"
+	    	        + "-fx-border-width: 1;" + "-fx-border-insets: 5;"
+	    	        + "-fx-border-radius: 5;" + "-fx-border-color: black;");
+
+	      
+	      VBox addUserVBox = new VBox(10);
+	      
+	      HBox userIdHbox = new HBox(10);
+	      Label userIdLabel = new Label("Enter user id");
+	      TextField userIdTextField = new TextField();
+	      userIdHbox.getChildren().addAll(userIdLabel , userIdTextField);
+
+	      HBox userEmailHbox = new HBox(10);
+		  Label userEmailLabel = new Label("Enter user email");
+	      TextField userEmailTextField = new TextField();
+	      userEmailHbox.getChildren().addAll(userEmailLabel , userEmailTextField);
+	     
+	      HBox userNameHbox = new HBox(10);
+	      Label userNameLabel = new Label("Enter user name");
+	      TextField userNameTextField = new TextField();
+	      userNameHbox.getChildren().addAll(userNameLabel , userNameTextField);
+
+	      HBox userTypebox = new HBox(10);
+	      Label userTypeLabel = new Label("Select User type");
+	      ComboBox<String> userTypes = new ComboBox<String>();
+	      userTypebox.getChildren().addAll(userTypeLabel , userTypes);
+
+	      Button btnAddUser = new Button("Add User");
+	      
+	      TextArea statusMessage = new  TextArea();
+	      statusMessage.setPrefHeight(40);
+	      
+	      
+	      addUserVBox.getChildren().addAll(userIdHbox , userEmailHbox, userNameHbox , userTypebox, btnAddUser , statusMessage);
+	      
+	      addUserVBox.setStyle("-fx-padding: 10;" + "-fx-border-style: solid inside;"
+	    	        + "-fx-border-width: 1;" + "-fx-border-insets: 5;"
+	    	        + "-fx-border-radius: 5;" + "-fx-border-color: black;");
+
+	      tabTwoVBox.getChildren().addAll(userDetailHbox, addUserVBox );
+	      
+	      manageUsers.setContent(tabTwoVBox);
 	      
 	      Tab displayReports = new Tab();
 	      displayReports.setText("Display Reports");
