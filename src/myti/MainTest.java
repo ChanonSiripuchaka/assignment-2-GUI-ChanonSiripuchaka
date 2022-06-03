@@ -10,6 +10,8 @@ import java.util.Map;
 
 import org.junit.jupiter.api.Test;
 
+import gui.TitleWindow;
+
 class MainTest {
 	ArrayList<Station> stations = new ArrayList<>();
 	
@@ -22,7 +24,7 @@ class MainTest {
 		stations.add(new Station("Epping", ZonesEnum.ZONE_TWO));
 		
 		
-		assertEquals(MyTiSystem.isSameZone(0, 1, stations),true);
+		assertEquals(TitleWindow.isSameZone(0, 1, stations),true);
 		
 		
 	}
@@ -39,7 +41,7 @@ class MainTest {
 		myTis .add(new MyTi(userTestOne));
 		myTis.add(new MyTi(userTestTwo));
 
-		assertEquals(MyTiSystem.canBuyPass(myTis, 12, 0), false);
+		assertEquals(TitleWindow.canBuyPass(myTis, 12, 0), false);
 
 	}
 	
@@ -55,7 +57,7 @@ class MainTest {
 		myTis .add(new MyTi(userTestOne));
 		myTis.add(new MyTi(userTestTwo));
 
-		assertEquals(MyTiSystem.getMyTiIndex("vm", myTis), 1);
+		assertEquals(TitleWindow.getMyTiIndex("vm", myTis), 1);
 }
 	
 
@@ -70,7 +72,7 @@ class MainTest {
 		myTis .add(new MyTi(userTestOne));
 		myTis.add(new MyTi(userTestTwo));
 
-	    String result =	MyTiSystem.checkCreditConstraints(myTis.get(0), 200);
+	    String result =	TitleWindow.checkCreditConstraints(myTis.get(0), 200);
 		assertEquals("Sorry, the max amount of credit allowed is $100.00", result);
 
         

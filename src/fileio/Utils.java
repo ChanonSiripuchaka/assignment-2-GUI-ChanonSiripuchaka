@@ -33,7 +33,7 @@ public class Utils {
 	
 	public static Map<String, User> usersList = new HashMap<String, User>();
 	public static ArrayList<MyTi> myTis = new ArrayList<MyTi>();
-	static ArrayList<String> readFromFileStrings = new ArrayList<>();
+	public static ArrayList<String> readFromFileStrings = new ArrayList<>();
 	static int pricesindex = 0;
 	
 	
@@ -85,8 +85,8 @@ public class Utils {
 	}
 	
 	
-	public static void writeToFile() throws IOException {
-			File fout = new File("test_data.txt");
+	public static void writeToFile(String filename) throws IOException {
+			File fout = new File(filename);
 			FileOutputStream fos = new FileOutputStream(fout);
 		 
 			BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(fos));
